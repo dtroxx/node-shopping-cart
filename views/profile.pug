@@ -1,0 +1,16 @@
+extends layout
+
+block content
+
+  .row
+    h1 User Profile
+    hr
+    h2 My Orders
+    .panel.panel-default
+      .panel-body
+        ul.list-group
+          li.list-group-item
+            span.badge {{ this.price }}
+            |               {{ this.item.title }} | {{ this.qty }} Units
+      .panel-footer
+        strong Total Price: ${{ this.cart.totalPrice }}

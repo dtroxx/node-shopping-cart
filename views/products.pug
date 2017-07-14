@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  //- pre=h.dump(productChunks)
+  .container
+    //- iterate threw each array of products by chunk size and create a row
+    each chunk in productChunks
+      .row
+        //- then display each product in the chunk
+        each product in chunk
+          .col-sm-6.col-md-4
+            .thumbnail
+              img.img-responsive(src=`${product.imagePath}`, alt=`${product.title}`)
+              .caption
+              h3 #{product.title}
+              p.description #{product.description}
+              .clearfix
+                .price.pull-left Price: $#{product.price}
+                a.btn.btn-success.pull-right(href='/add-to-cart/{{this._id}}', role='button') Add to Cart
