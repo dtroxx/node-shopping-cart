@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
 const { catchErrors } = require('../handlers/errorHandlers');
@@ -18,6 +19,6 @@ router.post('/login', authController.login);
 
 router.get('/logout', authController.logout);
 
-router.get('/profile', catchErrors(userController.getProfile));
+router.get('/profile', ensureLoggedIn('/user/login'), catchErrors(userController.getProfile));
 
 module.exports = router;

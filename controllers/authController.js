@@ -2,23 +2,16 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 
 exports.login = passport.authenticate('local', {
+  successReturnToOrRedirect: '/',
   failureRedirect: '/user/login',
   failureFlash: true
 });
 
 exports.registerLogin = passport.authenticate('local', {
-  successRedirect: '/',
+  successReturnToOrRedirect: '/',
   successFlash: 'Thank you for registering! You are now logged in!',
   failureRedirect: '/user/register',
   failureFlash: true
-}, (req, res) => {
-  if (req.session.oldUrl) {
-    const oldUrl = req.session.oldUrl;
-    req.session.oldUrl = null;
-    res.redirect(oldUrl);
-  } else {
-    res.redirect('/user/profile');
-  }
 });
 
 exports.logout = (req, res) => {
