@@ -16,4 +16,4 @@ block content
               p.description #{product.description}
               .clearfix
                 .price.pull-left Price: $#{product.price}
-                a.btn.btn-success.pull-right(href='/add-to-cart/{{this._id}}', role='button') Add to Cart
+                a.btn.btn-success.pull-right(href=`/add-to-cart/${product.id}`, role='button') Add to Cart

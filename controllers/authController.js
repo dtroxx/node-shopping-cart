@@ -3,16 +3,22 @@ const passport = require('passport');
 
 exports.login = passport.authenticate('local', {
   failureRedirect: '/user/login',
-  failureFlash: 'Failed Login!',
-  successRedirect: '/',
-  successFlash: 'Welcome back! Your are now logged in.'
+  failureFlash: true
 });
 
 exports.registerLogin = passport.authenticate('local', {
   successRedirect: '/',
   successFlash: 'Thank you for registering! You are now logged in!',
-  failureRedirect: '/login',
+  failureRedirect: '/user/register',
   failureFlash: true
+}, (req, res) => {
+  if (req.session.oldUrl) {
+    const oldUrl = req.session.oldUrl;
+    req.session.oldUrl = null;
+    res.redirect(oldUrl);
+  } else {
+    res.redirect('/user/profile');
+  }
 });
 
 exports.logout = (req, res) => {

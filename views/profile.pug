@@ -1,16 +1,21 @@
 extends layout
 
 block content
-
+  //-pre=h.dump(orders)
   .row
     h1 User Profile
     hr
     h2 My Orders
-    .panel.panel-default
-      .panel-body
-        ul.list-group
-          li.list-group-item
-            span.badge {{ this.price }}
-            |               {{ this.item.title }} | {{ this.qty }} Units
-      .panel-footer
-        strong Total Price: ${{ this.cart.totalPrice }}
+    each order in orders
+      .panel.panel-default        
+        .panel-body
+          ul.list-group
+            each product in order.cart.items       
+              li.list-group-item
+                span.badge $#{product.item.price}
+                =product.item.title
+                | 
+                | - Qty: 
+                =product.qty
+        .panel-footer
+          strong Total Price: #{order.cart.totalPrice}

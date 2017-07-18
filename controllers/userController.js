@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const express = require('express');
+const router = express.Router();
 const promisify = require('es6-promisify');
 const User = mongoose.model('User');
 const Order = mongoose.model('Order');
@@ -16,7 +18,7 @@ exports.register = async (req, res, next) => {
   // .register handles saving to database so there is no .save()
   // .register method comes from passportLocalMongoose in User.js model
   const register = promisify(User.register, User); 
-  await register(user, req.body.password);   // 
+  await register(user, req.body.password);
   next(); // pass to authController.login to autologin after being registered
 };
 
@@ -55,23 +57,19 @@ exports.checkIfUserExist = async (req, res, next) => {
     res.render('register', { title: 'Register', name: name, email: user.email, flashes: req.flash() });
     return;
   }
-  next();
+  next(); // no user exists!
 };
 
 exports.loginForm = (req, res) => {
   res.render('login', { title: 'Login' });
 };
 
-exports.getProfile = (req, res) => {
-  Order.find({ user: req.user }, (err, orders) => {
-    if (err) {
-      return res.write('Error!');
-    }
-    let cart;
-    orders.forEach(function(order) {
-      cart = new Cart(order.cart);
-      order.items = cart.generateArray();
-    });
-    res.render('profile', { orders: orders });
-    });
+exports.getProfile = async (req, res) => {
+  const orders = await Order.find({ user: req.user });
+  let cart;
+  orders.forEach((order) => {
+    cart = new Cart(order.cart);
+    order.items = cart.generateArray();
+  });
+  res.render('profile', { title: 'Orders', orders: orders });
 };
