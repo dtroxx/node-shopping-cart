@@ -13,7 +13,7 @@ exports.getCheckout = (req, res) => {
 };
 
 exports.postCheckout = (req, res) => {
-  if (!req.session.cart) {    
+  if (!req.session.cart || req.session.cart.totalQty === 0) {    
     return res.redirect('/shopping-cart');
   }
   const cart = new Cart(req.session.cart);
