@@ -17,7 +17,10 @@ nav.navbar.navbar-default
             i.fa.fa-shopping-cart(aria-hidden='true')
             |  Shopping Cart
             |
-            span.badge #{session.cart.totalQty}            
+            if session.cart
+              span.badge #{session.cart.totalQty}
+            if !session.cart
+              spand.badge 0              
         li.dropdown
           a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
             i.fa.fa-user(aria-hidden='true')
