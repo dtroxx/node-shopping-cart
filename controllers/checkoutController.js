@@ -4,7 +4,7 @@ const Order = require('../models/Order');
 
 exports.getCheckout = (req, res) => {
   if (!req.session.cart || req.session.cart.totalQty === 0) {
-    req.flash('warning', 'Your shopping cart is empty');
+    req.flash('warning', 'Your cart is empty.');
     return res.redirect('/shopping-cart');
   }
   const cart = new Cart(req.session.cart);
