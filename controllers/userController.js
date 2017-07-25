@@ -2,12 +2,15 @@ const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
 const promisify = require('es6-promisify');
+const csrf = require('csurf');
 const User = mongoose.model('User');
 const Order = mongoose.model('Order');
 const Cart = require('../models/Cart');
 
+const csrfProtection = csrf();
+
 exports.registerForm = (req, res) => {
-  res.render('register', { title: 'Register' });
+  res.render('register', { title: 'Register', csrfToken: req.csrfToken() });
 };
 
 exports.register = async (req, res, next) => {

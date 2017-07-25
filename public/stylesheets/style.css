@@ -14,3 +14,19 @@
   font-weight: bold;
   font-size: 20px;
 }
+
+.price-modal {
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.quick-view {
+ margin-right: 10px;
+}
+
+.sale-price-modal {
+  font-weight: bold;
+  font-size: 25px;
+  color: red;
+}
+
