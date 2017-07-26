@@ -9,7 +9,6 @@ const passport = require('passport');
 const promisify = require('es6-promisify');
 const flash = require('connect-flash');
 const expressValidator = require('express-validator');
-const csrf = require('csurf');
 
 const helpers = require('./helpers');
 const errorHandlers = require('./handlers/errorHandlers');
@@ -57,9 +56,6 @@ app.use(passport.session());
 // // The flash middleware let's us use req.flash('error', 'Shit!'), which will then pass that message to the next page the user requests
 app.use(flash());
 
-// csurf protection middleware 
-app.use(csrf());
-
 // pass variables to our templates + all requests
 app.use((req, res, next) => {
   res.locals.h = helpers;
@@ -68,7 +64,6 @@ app.use((req, res, next) => {
   res.locals.user = req.user || null;
   res.locals.currentPath = req.path;
   res.locals.session = req.session;
-  res.locals.csrf_token = req.csrfToken();
   next();
 });
 
