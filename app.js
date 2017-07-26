@@ -1,6 +1,6 @@
 const express = require('express');
-const session = require('express-session');
 const mongoose = require('mongoose');
+const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -45,7 +45,8 @@ app.use(session({
   key: process.env.KEY,
   resave: false,
   saveUninitialized: false,
-  store: new MongoStore({ mongooseConnection: mongoose.connection })
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
+  cookie: { maxAge: 180 * 60 * 1000 }, // 3 Hours
 }));
 
 // // Passport JS is what we use to handle our logins

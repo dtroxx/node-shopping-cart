@@ -13,5 +13,6 @@ exports.getProducts = async (req, res) => {
   for (let i = 0; i < products.length; i += chunkSize) {
     productChunks.push(products.slice(i, i + chunkSize));
   }
+  //res.send(req.session);
   res.render('products', { title: 'Node Demo Shopping', productChunks, cart });
 };

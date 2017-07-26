@@ -3,14 +3,8 @@ const passport = require('passport');
 
 exports.login = passport.authenticate('local', {
   successReturnToOrRedirect: '/',
+  successFlash: `Welcome! You are now logged in`,
   failureRedirect: '/user/login',
-  failureFlash: true
-});
-
-exports.registerLogin = passport.authenticate('local', {
-  successReturnToOrRedirect: '/',
-  successFlash: 'Thank you for registering! You are now logged in!',
-  failureRedirect: '/user/register',
   failureFlash: true
 });
 

@@ -14,7 +14,15 @@ const productSchema = new Schema({
     type: String,
     required: true
   },
+  additionalInfo: {
+    type: String
+  },
+  category: String,
   price: {
+    type: Number,
+    required: true
+  },
+  mfgPrice: {
     type: Number,
     required: true
   }
