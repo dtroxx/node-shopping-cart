@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  //-pre=h.dump(product)  
+  .container
+    .row
+      .col-md-4
+        img.img-responsive.product-img(src=`${product.imagePath}`, alt=`${product.title}`)
+      .col-md-8
+        h1 #{product.title}        
+        p #{product.description}
+        h3 Reg. Price 
+         s $#{product.mfgPrice}         
+        h2 On Sale: $#{product.price}
+        a.btn.btn-success.btn.lg(href=`/add-to-cart/${product.id}`) Add to Cart
+    hr    
+    ul.nav.nav-tabs
+      li.active(role='presentation')
+        a(href='#description', aria-controls='description', role='tab', data-toggle='tab') Description
+      li(role='presentation')
+        a(href='#additional-info', aria-controls='additional-info', role='tab', data-toggle='tab') Additional Info
+      li(role='presentation')
+    .tab-content
+      #description.tab-pane.active(role='tabpanel')
+        p #{product.description}
+      #additional-info.tab-pane(role='tabpanel')
+        p #{product.additionalInfo}
+    hr          

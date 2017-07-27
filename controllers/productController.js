@@ -16,3 +16,9 @@ exports.getProducts = async (req, res) => {
   //res.send(req.session);
   res.render('products', { title: 'Node Demo Shopping', productChunks, cart });
 };
+
+exports.getProduct = async (req, res) => {
+  const productId = req.params.id;
+  const product = await Product.findOne({ _id: productId });
+  res.render('product', { product });
+};
