@@ -10,9 +10,11 @@ block content
         each product in chunk
           .col-sm-6.col-md-4
             .thumbnail
-              img.img-responsive(src=`${product.imagePath}`, alt=`${product.title}`)
+              a(href=`/product/${product.id}`)
+                img.img-responsive(src=`${product.imagePath}`, alt=`${product.title}`)
               .caption
-              h3 #{product.title}
+              h3 
+                a(href=`/product/${product.id}`) #{product.title}
               p.description #{product.description}
               .clearfix
                 .price.pull-left Price: $#{product.price}
