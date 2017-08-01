@@ -9,6 +9,9 @@ const { catchErrors } = require('../handlers/errorHandlers');
 /* Home Page */
 router.get('/', catchErrors(productController.getProducts));
 
+/* Product Page */
+router.get('/product/:id', catchErrors(productController.getProduct));
+
 /* Shopping Cart Routes */
 router.get('/add-to-cart/:id', cartController.addToCart);
 router.get('/shopping-cart', cartController.getCart);

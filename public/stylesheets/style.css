@@ -30,3 +30,7 @@
   color: red;
 }
 
+.product-img {
+  max-height: 500px;
+}
+
