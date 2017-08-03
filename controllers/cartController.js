@@ -32,6 +32,14 @@ exports.reduceByOne = (req, res) => {
   res.redirect('/shopping-cart');
 };
 
+exports.addByOne = (req, res) => {
+  const productId = req.params.id;
+  const cart = new Cart(req.session.cart ? req.session.cart : {});
+  cart.addByOne(productId);
+  req.session.cart = cart;
+  res.redirect('/shopping-cart');
+};
+
 exports.removeItem = (req, res) => {
   const productId = req.params.id;
   const cart = new Cart(req.session.cart ? req.session.cart : {});

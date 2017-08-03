@@ -15,7 +15,8 @@ router.get('/product/:id', catchErrors(productController.getProduct));
 /* Shopping Cart Routes */
 router.get('/add-to-cart/:id', cartController.addToCart);
 router.get('/shopping-cart', cartController.getCart);
-router.get('/reduce/:id', cartController.reduceByOne);
+router.get('/minus/:id', cartController.reduceByOne);
+router.get('/plus/:id', cartController.addByOne);
 router.get('/remove/:id', cartController.removeItem);
 
 /* Checkout Routes */
